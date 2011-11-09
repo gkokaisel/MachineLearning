@@ -1,0 +1,4 @@
+J =(1/m)*sum(-y.*log(theta) - (1-y).*log(1-theta));
+grad = zeros(size(theta));
+
+grad = theta - 1/m * X' * ((X * theta) - y);
