@@ -45,7 +45,7 @@ grad = (1/m).*X' * (h-y);
 G = theta;	
 G(1) = 0;	
 grad = grad + (lambda/m).*G; 
-%grad(2:end) = (1/m)*((X' * (sigmoid(X * theta)-y))(2:end) + (lambda/m) * theta(2:end));
+
 
 
 
