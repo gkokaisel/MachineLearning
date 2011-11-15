@@ -82,18 +82,18 @@ h = sigmoid(z3);
 y1 = eye(num_labels)(y,:);
 
 % calculating cost without regularization and setting that to J...
-J = sum((-1 / m) * sum((y1 .* log(h)) + ((1 - y1) .* (log(1 - h))))) + ...
-(lambda/(2*m)) * [(sum(sum(Theta1(:,2:end).^2))) + (sum(sum(Theta2(:,2:end).^2)))];
+J = sum((-1/m) * sum((y1 .* log(h)) + ((1 - y1) .* (log(1 - h))))) + ...
+(lambda/(2*m)) * [(sum(sumsq(Theta1(:,2:end)))) + (sum(sumsq(Theta2(:,2:end))))];
 
 % Backpropagation...
 delta3 =(h - y1); %.* sigmoidGradient(z3);
-delta2 = delta3 * Theta2(:, 2 : end).* sigmoidGradient(z2);
+delta2 = delta3 * Theta2(:,2:end).* sigmoidGradient(z2);
 Delta1 = delta2'*X;
 Delta2 = delta3'*a2;
-Theta1_grad = Delta1 / m;
-Theta2_grad = Delta2 / m;
-Theta1_grad( :, 2 : end ) = ( Delta1( :, 2 : end ) / m ) + ( lambda * Theta1( :, 2 : end ) ) / m;
-Theta2_grad( :, 2 : end ) = ( Delta2( :, 2 : end ) / m ) + ( lambda * Theta2( :, 2 : end ) ) / m;
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
+Theta1_grad(:,2:end) = (Delta1(:,2:end)/m) + (lambda*Theta1(:,2:end))/m;
+Theta2_grad(:,2:end) = (Delta2(:,2:end)/m) + (lambda*Theta2(:,2:end))/m;
 
 % -------------------------------------------------------------
 
