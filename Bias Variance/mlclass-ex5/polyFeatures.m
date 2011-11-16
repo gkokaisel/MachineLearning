@@ -19,7 +19,7 @@ X_poly = zeros(numel(X), p);
 % The Polynomial regression fit with bsxfun continues to climb instead of immediately drop off,
 % which is what the next two methods do. 
 m = size(X, 1);
-for i = 1:m
+i = 1:m;
 p = (1:8);
 X_poly(i, :) = bsxfun(@power, X(i), p);
 end
