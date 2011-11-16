@@ -20,7 +20,7 @@ X_poly = zeros(numel(X), p);
 % which is what the next two methods do. 
 i = 1:(numel(X));
 p = (1:p);
-X_poly(i, :) = bsxfun(@power, X(i), p);
+X_poly(i, p) = bsxfun(@power, X(i), p);
 end
  
 %for i = 1:p
