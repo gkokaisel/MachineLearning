@@ -14,14 +14,11 @@ X_poly = zeros(numel(X), p);
 %               column of X contains the values of X to the p-th power.
 %
 % 
+% All three functions below work. Unsure which is the best way. 
 
-% All three solutions work, but bsxfun produces a different figure. Also, bsxfun seems more accurate.
-% The Polynomial regression fit with bsxfun continues to climb instead of immediately drop off,
-% which is what the next two methods do. 
-m = size(X, 1);
-for i = 1:m
-p = (1:8);
-X_poly(i, :) = bsxfun(@power, X(i), p);
+i = 1:(numel(X));
+p = (1:p);
+X_poly(i, p) = bsxfun(@power, X(i), p);
 end
  
 %for i = 1:p
