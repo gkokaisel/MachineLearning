@@ -32,14 +32,20 @@ centroids = zeros(K, n);
 %end
 
 %% This method is more flexible, but much slower %%
-for i=1:K
- s = zeros(1,n);
-  for j=1:m
-   if idx(j)==i
-    s=s+X(j,:);
-   end
-  end
- centroids(i, :) = s/(sum(idx==i));
+%for i=1:K
+% s = zeros(1,n);
+%  for j=1:m
+%   if idx(j)==i
+%    s=s+X(j,:);
+%   end
+%  end
+% centroids(i, :) = s/(sum(idx==i));
+%end
+
+%% Best solution for flexibility and speed %%
+for i = 1:K
+  cluster_examples = X(find(idx==i), :);
+  centroids(i, :) = sum(cluster_examples) / size(cluster_examples, 1);
 end
 % =============================================================
 
