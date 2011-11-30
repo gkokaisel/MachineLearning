@@ -44,8 +44,8 @@ centroids = zeros(K, n);
 
 %% Best solution for flexibility and speed %%
 for i = 1:K
-  cluster_examples = X(find(idx==i), :);
-  centroids(i, :) = sum(cluster_examples) / size(cluster_examples, 1);
+  %cluster_examples = X(find(idx==i), :);% can simply this by consolidation in line below...
+  centroids(i, :) = sum(X(find(idx==i), :)) / size(X(find(idx==i), :), 1);
 end
 % =============================================================
 
