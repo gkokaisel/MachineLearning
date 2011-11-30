@@ -97,12 +97,15 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
+% For loop is not necessary...
+% for idx =1:length(vocabList) 
+ % if strcmp(str,vocabList{idx})
+    % word_indices = [word_indices; idx]; 
+ % end
+% end
 
-for idx =1:length(vocabList) 
- if strcmp(str,vocabList{idx})
-    word_indices = [word_indices; idx]; 
- end
-end
+% Using the find function can avoid for loop...
+word_indices = [word_indices; find(strcmp(str,vocabList))]; 
 
     % =============================================================
 

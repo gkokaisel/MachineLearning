@@ -25,22 +25,31 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
 %
 
 
-C_vec = [0.01 0.03 0.1 0.3 1 3 10 30]';
-sigma_vec = [0.01 0.03 0.1 0.3 1 3 10 30]';
+fprintf('********************************************************************************\n');
+fprintf('Start searching parameters [C, sigma] to find optimum values. Relax, this will take a few moments.\n');
+error_min = inf;
+values = [0.01 0.03 0.1 0.3 1 3 10 30];
 
-% Enable the code below to find search over the parameters C and sigma.
-min_err = 100000;
-for i = 1:length(C_vec)
-for j = 1:length(sigma_vec)
-model = svmTrain(X, y, C_vec(i), @(x1, x2) gaussianKernel(x1, x2, sigma_vec(j)));
-predictions = svmPredict(model, Xval);
-if min_err > mean(double(predictions ~= yval))
-min_err = mean(double(predictions ~= yval));
-C = C_vec(i)
-sigma = sigma_vec(j)
+for C_vec = values
+  for sigma_vec = values
+    fprintf('Train and evaluate (on cross validation set) for\n[_C, _sigma] = [%f %f]\n', C_vec, sigma_vec);
+    model = svmTrain(X, y, C_vec, @(x1, x2) gaussianKernel(x1, x2, sigma_vec));
+    err = mean(double(svmPredict(model, Xval) ~= yval));
+    fprintf('prediction error: %f\n', err);
+    if( err <= error_min )
+      fprintf('error_min updated!\n');
+      C = C_vec;
+      sigma = sigma_vec;
+      error_min = err;
+      fprintf('[C, sigma] = [%f %f]\n', C, sigma);
+    end
+    fprintf('--------\n');
+  end
 end
-end
-end
+
+fprintf('\nSearch completed.\nOptimum value for [C, sigma] = [%f %f] with prediction error = %f\n\n', C, sigma, error_min);
+fprintf('********************************************************************************\n');
+
 
 
 
