@@ -24,6 +24,7 @@ sigma2 = zeros(n, 1);
 mu = mean(X);
 %% Doing things the hard way! %%
 %sigma2 = 1/m * sum((X - repmat(mu,m,1)).* (X - repmat(mu,m,1)));
+%use opt 1 to use 1/m when computing sigma2
 sigma2 = var(X,1);
 end
 
