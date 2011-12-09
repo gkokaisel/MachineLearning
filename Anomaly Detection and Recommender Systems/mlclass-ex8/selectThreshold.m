@@ -28,7 +28,7 @@ for epsilon = min(pval):stepsize:max(pval)
 	tp = sum((predictions == 1) & (yval == 1));
 	fn = sum((predictions == 0) & (yval == 1));
 	% While this works, it's more efficient to simply write an if statement to only do the
-	% the calculatins for prec and rec where predictions are greater than 0.
+	% the calculations for prec and rec where predictions are greater than 0.
 	%if ((tp + fp)==0), % guards against division by 0 for precision	
 	%elseif ((tp + fn)==0), % guards agains division by 0 for recall
 	%F1 = 0;	
